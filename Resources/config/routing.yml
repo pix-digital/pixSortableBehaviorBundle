@@ -1,3 +1,0 @@
-pix_sortable_behavior_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: PixSortableBehaviorBundle:Default:index }

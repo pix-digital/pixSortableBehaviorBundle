@@ -58,10 +58,10 @@ class PositionHandler
 
     }
 
-    public function getLastPosition()
+    public function getLastPosition($entity)
     {
 
-        $query = $this->em->createQuery('SELECT MAX(m.position) FROM PixEquipeMedicaleBundle:Medecin m');
+        $query = $this->em->createQuery('SELECT MAX(m.position) FROM '.$entity.' m');
         $result = $query->getResult();
 
         if (array_key_exists(0, $result)) {
