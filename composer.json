@@ -21,7 +21,7 @@
     },
     "suggest": {
         "sonata-project/admin-bundle": "Can be easily integrated with Sonata Admin bundle",
-        "stof/doctrine-extensions-bundle": "1.1.*@dev",
+        "stof/doctrine-extensions-bundle": "1.1.*@dev"
     },
     "autoload": {
         "psr-0": { "Pix\\SortableBehaviorBundle": "" }
