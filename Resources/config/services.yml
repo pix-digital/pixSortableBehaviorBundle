@@ -1,0 +1,8 @@
+parameters:
+#    pix_sortable_behavior.example.class: Pix\SortableBehaviorBundle\Example
+
+services:
+    pix_sortable_behavior.position:
+        class: Pix\SortableBehaviorBundle\Services\PositionHandler
+        arguments:
+            entityManager: "@doctrine.orm.entity_manager"

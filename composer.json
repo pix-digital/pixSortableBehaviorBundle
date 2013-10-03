@@ -1,0 +1,35 @@
+{
+    "name": "pix-associates/sortable-behavior-bundle",
+    "type": "symfony-bundle",
+    "description": "Provides a way to sort your admin listing",
+    "keywords": ["sortable", "admin"],
+    "homepage": "https://github.com/pix-digital/pixSortableBehaviorBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicolas Ricci",
+            "email": "nr@pix-digital.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "symfony/framework-bundle": ">=2.1",
+        "symfony/form": ">=2.1"
+    },
+    "require-dev": {
+        "gedmo/doctrine-extensions": ">=2.2"
+    },
+    "suggest": {
+        "sonata-project/admin-bundle": "Can be easily integrated with Sonata Admin bundle",
+        "stof/doctrine-extensions-bundle": "1.1.*@dev",
+    },
+    "autoload": {
+        "psr-0": { "Pix\\SortableBehaviorBundle": "" }
+    },
+    "target-dir": "Pix/SortableBehaviorBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}

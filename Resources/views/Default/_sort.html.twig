@@ -1,0 +1,16 @@
+{% if object.position < admin.last_position %}
+    <a class="movebottom_link" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="Move bottom">⇊</a>
+{% endif %}
+
+{% if object.position < admin.last_position %}
+    <a class="movedown_link" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="Move down">↓</a>
+{% endif %}
+
+{% if object.position > 0 %}
+    <a class="moveup_link" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="Move up">↑</a>
+{% endif %}
+
+{% if object.position > 0 %}
+    <a class="movetop_link" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="Move top">⇈</a>
+{% endif %}
+
