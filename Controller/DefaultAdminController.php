@@ -5,7 +5,7 @@ namespace Pix\SortableBehaviorBundle\Controller;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class DefaultAdminController extends CRUDController
+class SortableAdminController extends CRUDController
 {
     /**
      * Move element

@@ -1,8 +1,8 @@
 {
-    "name": "pix-associates/sortable-behavior-bundle",
+    "name": "pixassociates/sortable-behavior-bundle",
     "type": "symfony-bundle",
     "description": "Provides a way to sort your admin listing",
-    "keywords": ["sortable", "admin"],
+    "keywords": ["sortable","admin","sonata"],
     "homepage": "https://github.com/pix-digital/pixSortableBehaviorBundle",
     "license": "MIT",
     "authors": [
