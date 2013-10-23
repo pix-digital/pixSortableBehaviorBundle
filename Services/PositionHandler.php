@@ -41,7 +41,7 @@ class PositionHandler
                 break;
 
             case 'top':
-                if ($object->getPosition() < $last_position) {
+                if ($object->getPosition() > 0) {
                     $position = 0;
                 }
                 break;
