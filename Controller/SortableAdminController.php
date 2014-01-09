@@ -12,6 +12,8 @@ class SortableAdminController extends CRUDController
      *
      * @param integer $id
      * @param string $position
+     *
+     * @return RedirectResponse
      */
     public function moveAction($id, $position)
     {
@@ -30,9 +32,11 @@ class SortableAdminController extends CRUDController
                 'objectId' => $this->admin->getNormalizedIdentifier($object)
             ));
         }
-        $this->get('session')->getFlashBag()->set('sonata_flash_info', 'Position mise à jour');
+
+        $this->get('session')->getFlashBag()->set('sonata_flash_success',
+            $this->admin->trans('flash_move_success', array(), 'PixSortableBehaviorBundle')
+        );
 
         return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
     }
-
 }
