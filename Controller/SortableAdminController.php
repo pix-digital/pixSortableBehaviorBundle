@@ -15,6 +15,7 @@ class SortableAdminController extends CRUDController
      */
     public function moveAction($id, $position)
     {
+        $id     = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         $position_service = $this->get('pix_sortable_behavior.position');
