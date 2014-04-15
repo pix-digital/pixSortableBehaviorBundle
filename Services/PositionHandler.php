@@ -30,31 +30,32 @@ class PositionHandler
         switch ($position) {
             case 'up' :
                 if ($object->getPosition() > 0) {
-                    $position = $object->getPosition() - 1;
+                    $new_position = $object->getPosition() - 1;
                 }
                 break;
 
             case 'down':
                 if ($object->getPosition() < $last_position) {
-                    $position = $object->getPosition() + 1;
+                    $new_position = $object->getPosition() + 1;
                 }
                 break;
 
             case 'top':
                 if ($object->getPosition() > 0) {
-                    $position = 0;
+                    $new_position = 0;
                 }
                 break;
 
             case 'bottom':
                 if ($object->getPosition() < $last_position) {
-                    $position = $last_position;
+                    $new_position = $last_position;
                 }
                 break;
+
+            default: $new_position = 0;
         }
 
-
-        return $position;
+        return $new_position;
 
     }
 
@@ -65,7 +66,7 @@ class PositionHandler
         $result = $query->getResult();
 
         if (array_key_exists(0, $result)) {
-            return $result[0][1];
+            return intval($result[0][1]);
         }
 
         return 0;
