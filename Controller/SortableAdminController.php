@@ -31,7 +31,8 @@ class SortableAdminController extends CRUDController
                 'objectId' => $this->admin->getNormalizedIdentifier($object)
             ));
         }
-        $this->get('session')->getFlashBag()->set('sonata_flash_info', 'Position mise à jour');
+        $translator = $this->get('translator');
+        $this->get('session')->getFlashBag()->set('sonata_flash_info', $translator->trans('Position mise à jour'));
 
         return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
     }
