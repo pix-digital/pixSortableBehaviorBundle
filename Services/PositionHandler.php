@@ -1,9 +1,11 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * Author: Nicolas R.
- * Date: 27/09/2013
- * Time: 13:53
+/*
+ * This file is part of the pixSortableBehaviorBundle.
+ *
+ * (c) Nicolas Ricci <nicolas.ricci@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Pix\SortableBehaviorBundle\Services;
