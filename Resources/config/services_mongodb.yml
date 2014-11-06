@@ -3,6 +3,6 @@ parameters:
 
 services:
     pix_sortable_behavior.position:
-        class: Pix\SortableBehaviorBundle\Services\PositionHandler
+        class: Pix\SortableBehaviorBundle\Services\PositionODMHandler
         arguments:
-            entityManager: "@doctrine.orm.entity_manager"
+            documentManager: "@doctrine_mongodb.odm.document_manager"
