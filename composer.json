@@ -1,14 +1,14 @@
 {
-    "name": "pixassociates/sortable-behavior-bundle",
+    "name": "Slavenin/sortable-behavior-bundle",
     "type": "symfony-bundle",
     "description": "Provides a way to sort your admin listing",
     "keywords": ["sortable","admin","sonata"],
-    "homepage": "https://github.com/pix-digital/pixSortableBehaviorBundle",
+    "homepage": "https://github.com/Slavenin/pixSortableBehaviorBundle.git",
     "license": "MIT",
     "authors": [
         {
-            "name": "Nicolas Ricci",
-            "email": "nr@pix-digital.com"
+            "name": "Maxim Barulin",
+            "email": "mbarulin@gmail.com"
         }
     ],
     "require": {
@@ -24,9 +24,9 @@
         "stof/doctrine-extensions-bundle": "1.1.*@dev"
     },
     "autoload": {
-        "psr-0": { "Pix\\SortableBehaviorBundle": "" }
+        "psr-0": { "Slavenin\\SortableBehaviorBundle": "" }
     },
-    "target-dir": "Pix/SortableBehaviorBundle",
+    "target-dir": "Slavenin/SortableBehaviorBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "0.1-dev"
