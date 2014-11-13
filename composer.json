@@ -1,5 +1,5 @@
 {
-    "name": "Slavenin/sortable-behavior-bundle",
+    "name": "slavenin/sortable-behavior-bundle",
     "type": "symfony-bundle",
     "description": "Provides a way to sort your admin listing",
     "keywords": ["sortable","admin","sonata"],
@@ -24,9 +24,9 @@
         "stof/doctrine-extensions-bundle": "1.1.*@dev"
     },
     "autoload": {
-        "psr-0": { "Slavenin\\SortableBehaviorBundle": "" }
+        "psr-0": { "slavenin\\SortableBehaviorBundle": "" }
     },
-    "target-dir": "Slavenin/SortableBehaviorBundle",
+    "target-dir": "slavenin/SortableBehaviorBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "0.1-dev"
