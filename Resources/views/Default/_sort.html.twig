@@ -1,16 +1,16 @@
 {% if object.position < admin.last_position %}
-    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="Move bottom">⇊</a>
+    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="Move bottom">↓↓</a>
 {% endif %}
 
 {% if object.position < admin.last_position %}
     <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="Move down">↓</a>
 {% endif %}
 
-{% if object.position > 0 %}
+{% if object.position > admin.first_position %}
     <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="Move up">↑</a>
 {% endif %}
 
-{% if object.position > 0 %}
-    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="Move top">⇈</a>
+{% if object.position > admin.first_position %}
+    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="Move top">↑↑</a>
 {% endif %}
 

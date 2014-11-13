@@ -45,5 +45,22 @@ class PositionODMHandler extends PositionHandler
         return 0;
     }
 
+    public function getFirstPosition($entity)
+    {
+        $result = $this->dm
+            ->createQueryBuilder($entity)
+            ->hydrate(false)
+            ->select('position')
+            ->sort('position','asc')
+            ->limit(1)
+            ->getQuery()
+            ->getSingleResult()
+        ;
 
+        if (is_array($result) && isset($result['position'])) {
+            return $result['position'];
+        }
+
+        return 0;
+    }
 }

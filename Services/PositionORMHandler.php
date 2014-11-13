@@ -39,5 +39,16 @@ class PositionORMHandler extends PositionHandler
         return 0;
     }
 
+     public function getFirstPosition($entity)
+    {
 
+        $query = $this->em->createQuery('SELECT MIN(m.position) FROM '.$entity.' m');
+        $result = $query->getResult();
+
+        if (array_key_exists(0, $result)) {
+            return intval($result[0][1]);
+        }
+
+        return 0;
+    }
 }
