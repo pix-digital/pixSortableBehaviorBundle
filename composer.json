@@ -24,7 +24,7 @@
         "stof/doctrine-extensions-bundle": "1.1.*@dev"
     },
     "autoload": {
-        "psr-0": { "slavenin\\SortableBehaviorBundle": "" }
+        "psr-0": { "Pix\\SortableBehaviorBundle": "" }
     },
     "target-dir": "slavenin/SortableBehaviorBundle",
     "extra": {

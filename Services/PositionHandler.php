@@ -12,32 +12,40 @@ namespace Pix\SortableBehaviorBundle\Services;
 
 abstract class PositionHandler
 {
+    protected $direction = null;
+    protected $last_position_e = null;
+    protected $first_position_e = null;
+    protected $obj_id = null;
 
+    const MOVE_UP = 'up';
+    const MOVE_DOWN = 'down';
+    const MOVE_TOP = 'top';
+    const MOVE_BOTTOM = 'bottom';
 
-    public function getPosition($object, $position, $last_position, $first_position)
+    public function getPosition($object)
     {
-        switch ($position) {
-            case 'up' :
-                if ($object->getPosition() > $first_position) {
+        switch ($this->getDirection()) {
+            case self::MOVE_UP :
+                if ($object->getPosition() > $this->getFirstPositionE()) {
                     $new_position = $object->getPosition() - 1;
                 }
                 break;
 
-            case 'down':
-                if ($object->getPosition() < $last_position) {
+            case self::MOVE_DOWN:
+                if ($object->getPosition() < $this->getLastPositionE()) {
                     $new_position = $object->getPosition() + 1;
                 }
                 break;
 
-            case 'top':
-                if ($object->getPosition() > $first_position) {
-                    $new_position = $first_position;
+            case self::MOVE_TOP:
+                if ($object->getPosition() > $this->getFirstPositionE()) {
+                    $new_position = $this->getFirstPositionE() - 1;
                 }
                 break;
 
-            case 'bottom':
-                if ($object->getPosition() < $last_position) {
-                    $new_position = $last_position;
+            case self::MOVE_BOTTOM:
+                if ($object->getPosition() < $this->getLastPositionE()) {
+                    $new_position = $this->getLastPositionE() + 1;
                 }
                 break;
 
@@ -48,93 +56,72 @@ abstract class PositionHandler
 
     }
 
-    public function updatePrevElement($direction, $position, $old_position, &$prev_obj, $last_position, $first_position)
+    public function updatePrevElement($old_position, &$prev_obj, $position)
     {
-        switch ($direction)
+        switch ($this->getDirection())
         {
-            case 'up' :
-            case 'down':
-                if ($position > $first_position || $position < $last_position)
+            case self::MOVE_UP :
+            case self::MOVE_DOWN:
+                if ($position > $this->getFirstPositionE()
+                    || $position < $this->getLastPositionE())
                 {
                     $prev_obj ->setPosition($old_position);
                 }
                 break;
-            case 'top':
-                $prev_obj ->setPosition(($first_position - 1));
+            case self::MOVE_TOP:
                 break;
-            case 'bottom':
-                $prev_obj ->setPosition(($last_position + 1));
+            case self::MOVE_BOTTOM:
                 break;
         }
 
-    }
-
-    /**
-     *
-     * @param type $direction
-     * @param type $position
-     * @param \Doctrine\ORM\EntityManager $em
-     * @param type $last_position
-     * @param type $ent_class
-     */
-    public function findAndUpdatePrevElement($direction, $position, &$em, $last_position, $ent_class, $id, $first_position)
-    {
-        $sign = false;
-        $sort = false;
-        switch ($direction)
-        {
-            case 'up' :
-                if ($position > $first_position)
-                {
-                    $sign = '<';
-                    $sort = 'DESC';
-                }
-            break;  
-            case 'down':
-                if ($position < $last_position)
-                {
-                    $sign = '>';
-                    $sort = 'ASC';
-                }
-                break;
-            case 'top':
-                break;
-            case 'bottom':
-                break;
-        }
-
-        if($sign)
-        {
-            $meta = $em->getClassMetadata($ent_class);
-            $identifier = $meta->getSingleIdentifierFieldName();
-
-            $prev_obj = $em
-                ->createQuery('select
-                                    e
-                                from ' . $ent_class .' e
-                                where
-                                    e.position ' . $sign . ' :p
-                                    and e.' . $identifier . ' <> :id
-                                order by
-                                    e.position ' . $sort)
-                ->setParameter('p', $position)
-                ->setParameter('id', $id)
-                ->setFirstResult(0)
-                ->setMaxResults(1)
-                ->getResult()
-            ;
-
-            if(!empty($prev_obj))
-            {
-                $old_position = $prev_obj[0]->getPosition();
-                $this->updatePrevElement($direction, $old_position, $position, $prev_obj[0], $last_position, $first_position);
-                return [$prev_obj[0], $old_position];
-            }
-        }
-
-        return false;
     }
 
     abstract public function getLastPosition($entity);
+    abstract public function getFirstPosition($entity);
+    abstract public function getNewPositionElement($ent_class, $position, $old_position);
+    abstract public function findAndUpdatePrevElement($position, $ent_class);
 
+    public function getDirection()
+    {
+        return $this->direction;
+    }
+
+    public function setDirection($direction)
+    {
+        $this->direction = $direction;
+        return $this;
+    }
+
+    public function getLastPositionE()
+    {
+        return $this->last_position_e;
+    }
+
+    public function setLastPositionE($pos)
+    {
+        $this->last_position_e = $pos;
+        return $this;
+    }
+
+    public function getFirstPositionE()
+    {
+        return $this->first_position_e;
+    }
+
+    public function setFirstPositionE($pos)
+    {
+        $this->first_position_e = $pos;
+        return $this;
+    }
+    
+    public function getObjId()
+    {
+        return $this->obj_id;
+    }
+
+    public function setObjId($id)
+    {
+        $this->obj_id = $id;
+        return $this;
+    }
 }

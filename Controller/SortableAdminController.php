@@ -34,29 +34,16 @@ class SortableAdminController extends CRUDController
         $last_position = $position_service->getLastPosition($ent_class);
         $first_position = $position_service->getFirstPosition($ent_class);
 
-        $position = $position_service->getPosition($object, $direction, $last_position, $first_position);
-        $old_position = $object->getPosition();
-
-        $em = $this->get('doctrine')->getManager();
-        $repo = $em->getRepository($ent_class);
-
-        //find object with new position value
-        $prev_obj = $repo->findOneBy(['position' => $position]);
-        $new_position = $position;
-        if(!is_null($prev_obj))
-        {
-            $position_service->updatePrevElement($direction, $position, $old_position, $prev_obj, $last_position, $first_position);
-        }
-        else
-        {
-            list($prev_obj, $new_position) = $position_service->findAndUpdatePrevElement($direction, $position, $em, $last_position, $ent_class, $id, $first_position);
-        }
+        $position_service
+            ->setDirection($direction)
+            ->setLastPositionE($last_position)
+            ->setFirstPositionE($first_position)
+            ->setObjId($id)
+        ;
         
-        if($prev_obj)
-        {
-            $em->persist($prev_obj);
-            $em->flush();
-        }
+        $position = $position_service->getPosition($object);
+        $old_position = $object->getPosition();
+        $new_position = $position_service->getNewPositionElement($ent_class, $position, $old_position);
 
         $object->setPosition($new_position);
         $this->admin->update($object);
