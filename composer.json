@@ -1,14 +1,14 @@
 {
-    "name": "pixassociates/sortable-behavior-bundle",
+    "name": "slavenin/sortable-behavior-bundle",
     "type": "symfony-bundle",
     "description": "Provides a way to sort your admin listing",
     "keywords": ["sortable","admin","sonata"],
-    "homepage": "https://github.com/pix-digital/pixSortableBehaviorBundle",
+    "homepage": "https://github.com/Slavenin/pixSortableBehaviorBundle.git",
     "license": "MIT",
     "authors": [
         {
-            "name": "Nicolas Ricci",
-            "email": "nr@pix-digital.com"
+            "name": "Maxim Barulin",
+            "email": "mbarulin@gmail.com"
         }
     ],
     "require": {

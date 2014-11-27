@@ -23,14 +23,29 @@ class SortableAdminController extends CRUDController
      */
     public function moveAction($id, $position)
     {
+        $direction = $position;
         $id     = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
-        $position_service = $this->get('pix_sortable_behavior.position');
-        $last_position = $position_service->getLastPosition(get_class($object));
-        $position = $position_service->getPosition($object, $position, $last_position);
+        $ent_class = get_class($object);
 
-        $object->setPosition($position);
+        $position_service = $this->get('pix_sortable_behavior.position');
+        
+        $last_position = $position_service->getLastPosition($ent_class);
+        $first_position = $position_service->getFirstPosition($ent_class);
+
+        $position_service
+            ->setDirection($direction)
+            ->setLastPositionE($last_position)
+            ->setFirstPositionE($first_position)
+            ->setObjId($id)
+        ;
+        
+        $position = $position_service->getPosition($object);
+        $old_position = $object->getPosition();
+        $new_position = $position_service->getNewPositionElement($ent_class, $position, $old_position);
+
+        $object->setPosition($new_position);
         $this->admin->update($object);
 
         if ($this->isXmlHttpRequest()) {

@@ -1,16 +1,21 @@
-{% if object.position < admin.last_position %}
-    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="Move bottom">⇊</a>
-{% endif %}
+{% block sort_buttons %}
+	{% block sort_buttons_bottom %}
+		<a class="btn btn-sm btn-default {% if object.position >= admin.last_position %}disabled{% endif %}" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="Move bottom">↓↓</a>
+	{% endblock %}
+	{% block sort_buttons_down %}
+		<a class="btn btn-sm btn-default {% if object.position >= admin.last_position %}disabled{% endif %}" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="Move down">↓</a>
+	{% endblock %}
+	{% block sort_buttons_up %}
+		<a class="btn btn-sm btn-default {% if object.position <= admin.first_position %}disabled{% endif %}" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="Move up">↑</a>
+	{% endblock %}
+	{% block sort_buttons_top %}
+		<a class="btn btn-sm btn-default {% if object.position <= admin.first_position %}disabled{% endif %}" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="Move top">↑↑</a>
+	{% endblock %}
+{% endblock %}
 
-{% if object.position < admin.last_position %}
-    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="Move down">↓</a>
-{% endif %}
-
-{% if object.position > 0 %}
-    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="Move up">↑</a>
-{% endif %}
-
-{% if object.position > 0 %}
-    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="Move top">⇈</a>
-{% endif %}
-
+{% block sort_separator %}
+	<style>
+		.separator {width: 1px; margin:-8px 8px -8px 8px; background:#ddd; float: left; display: inline-block; height: 46px;}
+	</style>
+	<span class="separator"></span>
+{% endblock %}
