@@ -1,6 +1,21 @@
-<a class="btn btn-sm btn-default {% if object.position >= admin.last_position %}disabled{% endif %}" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="Move bottom">↓↓</a>
-<a class="btn btn-sm btn-default {% if object.position >= admin.last_position %}disabled{% endif %}" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="Move down">↓</a>
-<a class="btn btn-sm btn-default {% if object.position <= admin.first_position %}disabled{% endif %}" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="Move up">↑</a>
-<a class="btn btn-sm btn-default {% if object.position <= admin.first_position %}disabled{% endif %}" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="Move top">↑↑</a>
+{% block sort_buttons %}
+	{% block sort_buttons_bottom %}
+		<a class="btn btn-sm btn-default {% if object.position >= admin.last_position %}disabled{% endif %}" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="Move bottom">↓↓</a>
+	{% endblock %}
+	{% block sort_buttons_down %}
+		<a class="btn btn-sm btn-default {% if object.position >= admin.last_position %}disabled{% endif %}" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="Move down">↓</a>
+	{% endblock %}
+	{% block sort_buttons_up %}
+		<a class="btn btn-sm btn-default {% if object.position <= admin.first_position %}disabled{% endif %}" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="Move up">↑</a>
+	{% endblock %}
+	{% block sort_buttons_top %}
+		<a class="btn btn-sm btn-default {% if object.position <= admin.first_position %}disabled{% endif %}" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="Move top">↑↑</a>
+	{% endblock %}
+{% endblock %}
 
-<span style="margin-left: 30px; float: left;display: inline-block;height: 30px;"></span>
+{% block sort_separator %}
+	<style>
+		.separator {width: 1px; margin:-8px 8px -8px 8px; background:#ddd; float: left; display: inline-block; height: 46px;}
+	</style>
+	<span class="separator"></span>
+{% endblock %}
