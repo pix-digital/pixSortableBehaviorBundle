@@ -30,7 +30,7 @@ abstract class PositionHandler
      *
      * @return string
      */
-    protected function getPositionFieldByEntity($entity) {
+    public function getPositionFieldByEntity($entity) {
         if(isset($this->positionField['entities'][$entity])) {
             return $this->positionField['entities'][$entity];
         } else {
