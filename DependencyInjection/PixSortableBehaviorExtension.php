@@ -33,5 +33,6 @@ class PixSortableBehaviorExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services_'.$config['db_driver'].'.yml');
 
+        $container->setParameter('pix.sortable.behavior.position.field', $config['position_field']);
     }
 }

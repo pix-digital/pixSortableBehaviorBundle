@@ -28,18 +28,19 @@ class PositionODMHandler extends PositionHandler
 
     public function getLastPosition($entity)
     {
+        $positionFiles = $this->getPositionFieldByEntity($entity);
         $result = $this->dm
             ->createQueryBuilder($entity)
             ->hydrate(false)
-            ->select('position')
-            ->sort('position','desc')
+            ->select($positionFiles)
+            ->sort($positionFiles,'desc')
             ->limit(1)
             ->getQuery()
             ->getSingleResult()
         ;
 
-        if (is_array($result) && isset($result['position'])) {
-            return $result['position'];
+        if (is_array($result) && isset($result[$positionFiles])) {
+            return $result[$positionFiles];
         }
         
         return 0;

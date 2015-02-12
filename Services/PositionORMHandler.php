@@ -28,8 +28,11 @@ class PositionORMHandler extends PositionHandler
 
     public function getLastPosition($entity)
     {
-
-        $query = $this->em->createQuery('SELECT MAX(m.position) FROM '.$entity.' m');
+        $query = $this->em->createQuery(sprintf(
+            'SELECT MAX(m.%s) FROM %s m',
+            $positionFiles = $this->getPositionFieldByEntity($entity),
+            $entity
+        ));
         $result = $query->getResult();
 
         if (array_key_exists(0, $result)) {

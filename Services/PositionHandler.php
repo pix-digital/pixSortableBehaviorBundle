@@ -13,30 +13,62 @@ namespace Pix\SortableBehaviorBundle\Services;
 abstract class PositionHandler
 {
 
+    protected $positionField;
 
+    abstract public function getLastPosition($entity);
+
+    /**
+     * @param mixed $positionField
+     */
+    public function setPositionField($positionField)
+    {
+        $this->positionField = $positionField;
+    }
+
+    /**
+     * @param $entity
+     *
+     * @return string
+     */
+    protected function getPositionFieldByEntity($entity) {
+        if(isset($this->positionField['entities'][$entity])) {
+            return $this->positionField['entities'][$entity];
+        } else {
+            return $this->positionField['default'];
+        }
+    }
+
+    /**
+     * @param $object
+     * @param $position
+     * @param $last_position
+     *
+     * @return int
+     */
     public function getPosition($object, $position, $last_position)
     {
+        $getter = sprintf('get%s', ucfirst($this->getPositionFieldByEntity(\Doctrine\Common\Util\ClassUtils::getClass($object))));
         switch ($position) {
             case 'up' :
-                if ($object->getPosition() > 0) {
-                    $new_position = $object->getPosition() - 1;
+                if ($object->{$getter}() > 0) {
+                    $new_position = $object->{$getter}() - 1;
                 }
                 break;
 
             case 'down':
-                if ($object->getPosition() < $last_position) {
-                    $new_position = $object->getPosition() + 1;
+                if ($object->{$getter}() < $last_position) {
+                    $new_position = $object->{$getter}() + 1;
                 }
                 break;
 
             case 'top':
-                if ($object->getPosition() > 0) {
+                if ($object->{$getter}() > 0) {
                     $new_position = 0;
                 }
                 break;
 
             case 'bottom':
-                if ($object->getPosition() < $last_position) {
+                if ($object->{$getter}() < $last_position) {
                     $new_position = $last_position;
                 }
                 break;
@@ -48,6 +80,5 @@ abstract class PositionHandler
 
     }
 
-    abstract public function getLastPosition($entity);
 
 }

@@ -6,3 +6,5 @@ services:
         class: Pix\SortableBehaviorBundle\Services\PositionODMHandler
         arguments:
             documentManager: "@doctrine_mongodb.odm.document_manager"
+        calls:
+            - [ 'setPositionField', [%pix.sortable.behavior.position.field%]]
