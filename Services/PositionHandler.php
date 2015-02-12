@@ -31,6 +31,9 @@ abstract class PositionHandler
      * @return string
      */
     public function getPositionFieldByEntity($entity) {
+        if(is_object($entity)) {
+            $entity = \Doctrine\Common\Util\ClassUtils::getClass($entity);
+        }
         if(isset($this->positionField['entities'][$entity])) {
             return $this->positionField['entities'][$entity];
         } else {
@@ -47,7 +50,7 @@ abstract class PositionHandler
      */
     public function getPosition($object, $position, $last_position)
     {
-        $getter = sprintf('get%s', ucfirst($this->getPositionFieldByEntity(\Doctrine\Common\Util\ClassUtils::getClass($object))));
+        $getter = sprintf('get%s', ucfirst($this->getPositionFieldByEntity($object)));
         switch ($position) {
             case 'up' :
                 if ($object->{$getter}() > 0) {
