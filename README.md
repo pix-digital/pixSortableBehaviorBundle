@@ -15,7 +15,7 @@ By default, this extension works with Doctrine ORM, but you can choose to use Do
 # app/config/config.yml
 pix_sortable_behavior:
     db_driver: mongodb # default value : orm
-    position_field
+    position_field:
         default: sort #default value : position
         entities:
             AcmeBundle/Entity/Foobar: order

@@ -44,7 +44,10 @@ class Configuration implements ConfigurationInterface
                 ->children()
                     ->scalarNode('default')->defaultValue('position')->end()
                     ->arrayNode('entities')
-                        ->prototype('scalar')
+                        ->prototype('scalar')->end()
+					->end()
+				->end()
+			->end()
             ;
 
         return $treeBuilder;
