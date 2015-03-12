@@ -1,8 +1,0 @@
-parameters:
-#    pix_sortable_behavior.example.class: Pix\SortableBehaviorBundle\Example
-
-services:
-    pix_sortable_behavior.position:
-        class: Pix\SortableBehaviorBundle\Services\PositionODMHandler
-        arguments:
-            documentManager: "@doctrine_mongodb.odm.document_manager"

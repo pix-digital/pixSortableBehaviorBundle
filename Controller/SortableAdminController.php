@@ -10,6 +10,7 @@
 
 namespace Pix\SortableBehaviorBundle\Controller;
 
+use Pix\SortableBehaviorBundle\Services\PositionHandler;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -26,11 +27,13 @@ class SortableAdminController extends CRUDController
         $id     = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
+        /** @var PositionHandler $position_service */
         $position_service = $this->get('pix_sortable_behavior.position');
-        $last_position = $position_service->getLastPosition(get_class($object));
+        $entity = \Doctrine\Common\Util\ClassUtils::getClass($object);
+        $last_position = $position_service->getLastPosition($entity);
         $position = $position_service->getPosition($object, $position, $last_position);
-
-        $object->setPosition($position);
+        $setter = sprintf('set%s', ucfirst($position_service->getPositionFieldByEntity($entity)));
+        $object->{$setter}($position);
         $this->admin->update($object);
 
         if ($this->isXmlHttpRequest()) {

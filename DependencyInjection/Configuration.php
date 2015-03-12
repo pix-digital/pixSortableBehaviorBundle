@@ -36,10 +36,18 @@ class Configuration implements ConfigurationInterface
                         ->ifNotInArray($supportedDrivers)
                         ->thenInvalid('The driver %s is not supported. Please choose one of '.json_encode($supportedDrivers))
                     ->end()
-                    ->cannotBeOverwritten()
-                    ->cannotBeEmpty()
-                    ->defaultValue('orm')
-                ->end()
+                ->cannotBeOverwritten()
+                ->cannotBeEmpty()
+                ->defaultValue('orm')
+            ->end()
+            ->arrayNode('position_field')
+                ->children()
+                    ->scalarNode('default')->defaultValue('position')->end()
+                    ->arrayNode('entities')
+                        ->prototype('scalar')->end()
+					->end()
+				->end()
+			->end()
             ;
 
         return $treeBuilder;
