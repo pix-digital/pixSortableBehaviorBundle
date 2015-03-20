@@ -32,7 +32,7 @@ class ObjectPositionExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return [
+        return array(
             new \Twig_SimpleFunction(self::NAME,
                 function ($entity)
                 {
@@ -40,6 +40,6 @@ class ObjectPositionExtension extends \Twig_Extension
                     return $entity->{$getter}();
                 }
             )
-        ];
+        );
     }
 }
