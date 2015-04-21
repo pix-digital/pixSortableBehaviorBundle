@@ -51,6 +51,7 @@ abstract class PositionHandler
     public function getPosition($object, $position, $last_position)
     {
         $getter = sprintf('get%s', ucfirst($this->getPositionFieldByEntity($object)));
+        $new_position = 0;
         switch ($position) {
             case 'up' :
                 if ($object->{$getter}() > 0) {
@@ -75,8 +76,6 @@ abstract class PositionHandler
                     $new_position = $last_position;
                 }
                 break;
-
-            default: $new_position = 0;
         }
 
         return $new_position;
