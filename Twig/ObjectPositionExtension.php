@@ -16,7 +16,7 @@ class ObjectPositionExtension extends \Twig_Extension
     /** @var PositionHandler $position_service */
     private $position_service;
 
-    function __construct(PositionHandler $position_service)
+    public function __construct(PositionHandler $position_service)
     {
         $this->position_service = $position_service;
     }
