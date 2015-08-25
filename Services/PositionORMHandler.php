@@ -10,7 +10,7 @@
 
 namespace Pix\SortableBehaviorBundle\Services;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class PositionORMHandler extends PositionHandler
 {
@@ -21,7 +21,7 @@ class PositionORMHandler extends PositionHandler
      */
     protected $em;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->em = $entityManager;
     }
