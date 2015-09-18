@@ -12,7 +12,6 @@ namespace Pix\SortableBehaviorBundle\Services;
 
 abstract class PositionHandler
 {
-
     protected $positionField;
 
     abstract public function getLastPosition($entity);
@@ -30,11 +29,12 @@ abstract class PositionHandler
      *
      * @return string
      */
-    public function getPositionFieldByEntity($entity) {
-        if(is_object($entity)) {
+    public function getPositionFieldByEntity($entity)
+    {
+        if (is_object($entity)) {
             $entity = \Doctrine\Common\Util\ClassUtils::getClass($entity);
         }
-        if(isset($this->positionField['entities'][$entity])) {
+        if (isset($this->positionField['entities'][$entity])) {
             return $this->positionField['entities'][$entity];
         } else {
             return $this->positionField['default'];
@@ -44,43 +44,41 @@ abstract class PositionHandler
     /**
      * @param $object
      * @param $position
-     * @param $last_position
+     * @param $lastPosition
      *
      * @return int
      */
-    public function getPosition($object, $position, $last_position)
+    public function getPosition($object, $position, $lastPosition)
     {
         $getter = sprintf('get%s', ucfirst($this->getPositionFieldByEntity($object)));
-        $new_position = 0;
+        $newPosition = 0;
+
         switch ($position) {
             case 'up' :
                 if ($object->{$getter}() > 0) {
-                    $new_position = $object->{$getter}() - 1;
+                    $newPosition = $object->{$getter}() - 1;
                 }
                 break;
 
             case 'down':
-                if ($object->{$getter}() < $last_position) {
-                    $new_position = $object->{$getter}() + 1;
+                if ($object->{$getter}() < $lastPosition) {
+                    $newPosition = $object->{$getter}() + 1;
                 }
                 break;
 
             case 'top':
                 if ($object->{$getter}() > 0) {
-                    $new_position = 0;
+                    $newPosition = 0;
                 }
                 break;
 
             case 'bottom':
-                if ($object->{$getter}() < $last_position) {
-                    $new_position = $last_position;
+                if ($object->{$getter}() < $lastPosition) {
+                    $newPosition = $lastPosition;
                 }
                 break;
         }
 
-        return $new_position;
-
+        return $newPosition;
     }
-
-
 }
