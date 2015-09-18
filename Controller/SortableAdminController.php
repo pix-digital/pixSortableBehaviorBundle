@@ -31,12 +31,27 @@ class SortableAdminController extends CRUDController
 
         $object = $this->admin->getSubject();
 
-        /** @var PositionHandler $position_service */
-        $position_service = $this->get('pix_sortable_behavior.position');
+        /** @var PositionHandler $positionService */
+        $positionService = $this->get('pix_sortable_behavior.position');
+
         $entity = \Doctrine\Common\Util\ClassUtils::getClass($object);
-        $last_position = $position_service->getLastPosition($entity);
-        $position = $position_service->getPosition($object, $position, $last_position);
-        $setter = sprintf('set%s', ucfirst($position_service->getPositionFieldByEntity($entity)));
+
+        $lastPosition = $positionService->getLastPosition($entity);
+
+        $position = $positionService->getPosition($object, $position, $lastPosition);
+
+        $setter = sprintf('set%s', ucfirst($positionService->getPositionFieldByEntity($entity)));
+
+        if (!method_exists($object, $setter)) {
+            throw new \LogicException(
+                sprintf(
+                    '%s does not implement ->%s() to set the desired position.',
+                    $object,
+                    $setter
+                )
+            );
+        }
+
         $object->{$setter}($position);
         $this->admin->update($object);
 
