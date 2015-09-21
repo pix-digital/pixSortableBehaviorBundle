@@ -3,8 +3,44 @@
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
-                <source>Position updated</source>
+                <source>flash_success_position_updated</source>
                 <target>Position wurde aktualisiert</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>flash_error_no_rights_update_position</source>
+                <target>Du hast keine Rechte um die Position zu ändern!</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>move_to_bottom</source>
+                <target>An das Ende schieben</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>move_down</source>
+                <target>runterschieben</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>move_up</source>
+                <target>hochschieben</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>move_to_top</source>
+                <target>An den Anfang schieben</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>icon_move_to_bottom</source>
+                <target>⇊</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>icon_move_down</source>
+                <target>↓</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>icon_move_up</source>
+                <target>↑</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>icon_move_to_top</source>
+                <target>⇈</target>
             </trans-unit>
         </body>
     </file>
