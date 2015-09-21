@@ -14,10 +14,8 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 
 class PositionODMHandler extends PositionHandler
 {
-
     /**
-     *
-     * @var DocumentManager
+     * DocumentManager
      */
     protected $dm;
 
@@ -28,23 +26,20 @@ class PositionODMHandler extends PositionHandler
 
     public function getLastPosition($entity)
     {
-        $positionFiles = $this->getPositionFieldByEntity($entity);
+        $positionFields = $this->getPositionFieldByEntity($entity);
         $result = $this->dm
             ->createQueryBuilder($entity)
             ->hydrate(false)
-            ->select($positionFiles)
-            ->sort($positionFiles,'desc')
+            ->select($positionFields)
+            ->sort($positionFields, 'desc')
             ->limit(1)
             ->getQuery()
-            ->getSingleResult()
-        ;
+            ->getSingleResult();
 
-        if (is_array($result) && isset($result[$positionFiles])) {
-            return $result[$positionFiles];
+        if (is_array($result) && isset($result[$positionFields])) {
+            return $result[$positionFields];
         }
-        
+
         return 0;
     }
-
-
 }

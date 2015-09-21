@@ -13,12 +13,14 @@ class ObjectPositionExtension extends \Twig_Extension
 {
     const NAME = 'sortableObjectPosition';
 
-    /** @var PositionHandler $position_service */
-    private $position_service;
+    /**
+     * PositionHandler
+     */
+    private $positionService;
 
-    public function __construct(PositionHandler $position_service)
+    public function __construct(PositionHandler $positionService)
     {
-        $this->position_service = $position_service;
+        $this->positionService = $positionService;
     }
 
     /**
@@ -36,7 +38,7 @@ class ObjectPositionExtension extends \Twig_Extension
             new \Twig_SimpleFunction(self::NAME,
                 function ($entity)
                 {
-                    $getter = sprintf('get%s', ucfirst($this->position_service->getPositionFieldByEntity($entity)));
+                    $getter = sprintf('get%s', ucfirst($this->positionService->getPositionFieldByEntity($entity)));
                     return $entity->{$getter}();
                 }
             )
