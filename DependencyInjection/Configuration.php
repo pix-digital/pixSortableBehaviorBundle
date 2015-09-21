@@ -25,15 +25,17 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
+        $supportedDrivers = array('orm', 'mongodb');
+
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('pix_sortable_behavior');
-        $supportedDrivers = array('orm', 'mongodb');
+
         $rootNode
             ->children()
             ->scalarNode('db_driver')
                 ->validate()
                     ->ifNotInArray($supportedDrivers)
-                    ->thenInvalid('The driver %s is not supported. Please choose one of '.json_encode($supportedDrivers))
+                    ->thenInvalid('The driver "%s" is not supported. Please choose one of ('.implode(', ', $supportedDrivers).')')
                 ->end()
                 ->cannotBeOverwritten()
                 ->cannotBeEmpty()
