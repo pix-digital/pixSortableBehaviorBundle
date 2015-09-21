@@ -1,17 +1,19 @@
-{% set pix_position = sortableObjectPosition(object) %}
-{% if pix_position < admin.last_position %}
-    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="Move bottom">⇊</a>
-{% endif %}
+{% if admin.isGranted('EDIT', object) and admin.hasRoute('edit') %}
+    {% set pix_position = sortableObjectPosition(object) %}
 
-{% if pix_position < admin.last_position %}
-    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="Move down">↓</a>
-{% endif %}
+    {% if pix_position < admin.last_position %}
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="Move bottom">⇊</a>
+    {% endif %}
 
-{% if pix_position > 0 %}
-    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="Move up">↑</a>
-{% endif %}
+    {% if pix_position < admin.last_position %}
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="Move down">↓</a>
+    {% endif %}
 
-{% if pix_position > 0 %}
-    <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="Move top">⇈</a>
-{% endif %}
+    {% if pix_position > 0 %}
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="Move up">↑</a>
+    {% endif %}
 
+    {% if pix_position > 0 %}
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="Move top">⇈</a>
+    {% endif %}
+{% endif %}

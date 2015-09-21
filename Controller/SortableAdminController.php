@@ -24,6 +24,12 @@ class SortableAdminController extends CRUDController
      */
     public function moveAction($id, $position)
     {
+        if (!$this->admin->isGranted('EDIT')) {
+            $this->addFlash('sonata_flash_error', 'You are not allowed to change the position!');
+
+            return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
+        }
+
         $id     = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
