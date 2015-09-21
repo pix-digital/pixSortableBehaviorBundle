@@ -20,6 +20,6 @@ pix_sortable_behavior:
     position_field:
         default: sort #default value : position
         entities:
-            AcmeBundle/Entity/Foobar: order
-            AcmeBundle/Entity/Baz: rang
+            AppBundle/Entity/Foobar: order
+            AppBundle/Entity/Baz: rang
 ```
