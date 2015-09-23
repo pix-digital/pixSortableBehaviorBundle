@@ -26,7 +26,10 @@ class SortableAdminController extends CRUDController
         $translator = $this->get('translator');
 
         if (!$this->admin->isGranted('EDIT')) {
-            $this->addFlash('sonata_flash_error', $translator->trans('flash_error_no_rights_update_position'));
+            $this->addFlash(
+                'sonata_flash_error',
+                $translator->trans('flash_error_no_rights_update_position')
+            );
 
             return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
         }
@@ -64,7 +67,10 @@ class SortableAdminController extends CRUDController
             ));
         }
 
-        $this->addFlash('sonata_flash_success', $translator->trans('flash_success_position_updated'));
+        $this->addFlash(
+            'sonata_flash_success',
+            $translator->trans('flash_success_position_updated')
+        );
 
         return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
     }
