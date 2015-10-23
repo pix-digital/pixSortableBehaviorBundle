@@ -34,7 +34,7 @@ class Configuration implements ConfigurationInterface
             ->children()
             ->scalarNode('db_driver')
                 ->info(sprintf(
-                    'These following drivers are aupported: %s',
+                    'These following drivers are supported: %s',
                     implode(', ', $supportedDrivers)
                 ))
                 ->validate()
