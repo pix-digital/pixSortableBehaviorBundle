@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="es" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>flash_success_position_updated</source>
+                <target>Posición actualizada</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>flash_error_no_rights_update_position</source>
+                <target>No tienes permisos para cambiar la posición</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>move_to_bottom</source>
+                <target>Mover al final</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>move_down</source>
+                <target>Mover uno abajo</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>move_up</source>
+                <target>Mover uno arriba</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>move_to_top</source>
+                <target>Mover al principio</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>icon_move_to_bottom</source>
+                <target>⇊</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>icon_move_down</source>
+                <target>↓</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>icon_move_up</source>
+                <target>↑</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>icon_move_to_top</source>
+                <target>⇈</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
