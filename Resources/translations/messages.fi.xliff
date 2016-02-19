@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>flash_success_position_updated</source>
+                <target>Järjestys päivitetty</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>flash_error_no_rights_update_position</source>
+                <target>Sinulla ei ole tarvittavia oikeuksia muuttaa järjestystä!</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>move_to_bottom</source>
+                <target>Siirrä loppuun</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>move_down</source>
+                <target>Siirrä alas</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>move_up</source>
+                <target>Siirrä ylös</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>move_to_top</source>
+                <target>Siirrä alkuun</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>icon_move_to_bottom</source>
+                <target>⇊</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>icon_move_down</source>
+                <target>↓</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>icon_move_up</source>
+                <target>↑</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>icon_move_to_top</source>
+                <target>⇈</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
