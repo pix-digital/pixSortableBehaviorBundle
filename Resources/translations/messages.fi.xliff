@@ -26,22 +26,6 @@
                 <source>move_to_top</source>
                 <target>Siirrä alkuun</target>
             </trans-unit>
-            <trans-unit id="7">
-                <source>icon_move_to_bottom</source>
-                <target>⇊</target>
-            </trans-unit>
-            <trans-unit id="8">
-                <source>icon_move_down</source>
-                <target>↓</target>
-            </trans-unit>
-            <trans-unit id="9">
-                <source>icon_move_up</source>
-                <target>↑</target>
-            </trans-unit>
-            <trans-unit id="10">
-                <source>icon_move_to_top</source>
-                <target>⇈</target>
-            </trans-unit>
         </body>
     </file>
 </xliff>
