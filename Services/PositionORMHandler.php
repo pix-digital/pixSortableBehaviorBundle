@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the pixSortableBehaviorBundle.
  *
@@ -10,37 +11,83 @@
 
 namespace Pix\SortableBehaviorBundle\Services;
 
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 
+/**
+ * Class PositionORMHandler
+ *
+ * @package Pix\SortableBehaviorBundle
+ */
 class PositionORMHandler extends PositionHandler
 {
+    /**
+     * @var array
+     */
+    private static $cacheLastPosition = [];
 
     /**
-     *
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     protected $em;
 
+    /**
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->em = $entityManager;
     }
 
+    /**
+     * @param object $entity
+     * @return int
+     */
     public function getLastPosition($entity)
     {
-        $query = $this->em->createQuery(sprintf(
-            'SELECT MAX(m.%s) FROM %s m',
-            $positionFiles = $this->getPositionFieldByEntity($entity),
-            $entity
-        ));
-        $result = $query->getResult();
+        $entityClass = ClassUtils::getClass($entity);
+        $groups      = $this->getSortableGroupsFieldByEntity($entityClass);
 
-        if (array_key_exists(0, $result)) {
-            return intval($result[0][1]);
+        $cacheKey = $this->getCacheKeyForLastPosition($entity, $groups);
+        if (!isset(self::$cacheLastPosition[$cacheKey])) {
+            $qb = $this->em->createQueryBuilder()
+                ->select(sprintf('MAX(t.%s) as last_position', $this->getPositionFieldByEntity($entityClass)))
+                ->from($entityClass, 't')
+            ;
+
+            if ($groups) {
+                $i = 1;
+                foreach ($groups as $groupName) {
+                    $getter = 'get' . $groupName;
+
+                    $qb
+                        ->andWhere(sprintf('t.%s = :group_%s', $groupName, $i))
+                        ->setParameter(sprintf('group_%s', $i), $entity->$getter())
+                    ;
+                    $i++;
+                }
+            }
+
+            self::$cacheLastPosition[$cacheKey] = (int)$qb->getQuery()->getSingleScalarResult();
         }
 
-        return 0;
+        return self::$cacheLastPosition[$cacheKey];
     }
 
+    /**
+     * @param object $entity
+     * @param array  $groups
+     * @return string
+     */
+    private function getCacheKeyForLastPosition($entity, $groups)
+    {
+        $cacheKey = ClassUtils::getClass($entity);
 
+        foreach ($groups as $groupName) {
+            $getter = 'get' . $groupName;
+            $cacheKey .= '_' . $entity->$getter()->getId();
+        }
+
+        return $cacheKey;
+    }
 }

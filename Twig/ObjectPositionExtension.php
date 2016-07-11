@@ -16,11 +16,14 @@ class ObjectPositionExtension extends \Twig_Extension
     /**
      * PositionHandler
      */
-    private $positionService;
+    private $positionHandler;
 
-    public function __construct(PositionHandler $positionService)
+    /**
+     * @param PositionHandler $positionHandler
+     */
+    public function __construct(PositionHandler $positionHandler)
     {
-        $this->positionService = $positionService;
+        $this->positionHandler = $positionHandler;
     }
 
     /**
@@ -28,20 +31,26 @@ class ObjectPositionExtension extends \Twig_Extension
      *
      * @return string The extension name
      */
-    public function getName() {
+    public function getName()
+    {
         return self::NAME;
     }
 
+    /**
+     * @return array
+     */
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction(self::NAME,
-                function ($entity)
-                {
-                    $getter = sprintf('get%s', ucfirst($this->positionService->getPositionFieldByEntity($entity)));
-                    return $entity->{$getter}();
-                }
-            )
+            new \Twig_SimpleFunction('currentObjectPosition', function ($entity) {
+                $getter = sprintf('get%s', ucfirst($this->positionHandler->getPositionFieldByEntity($entity)));
+
+                return $entity->{$getter}();
+            }),
+
+            new \Twig_SimpleFunction('lastPosition', function ($entity) {
+                return $this->positionHandler->getLastPosition($entity);
+            }),
         );
     }
 }

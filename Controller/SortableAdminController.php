@@ -10,16 +10,24 @@
 
 namespace Pix\SortableBehaviorBundle\Controller;
 
+use Doctrine\Common\Util\ClassUtils;
 use Pix\SortableBehaviorBundle\Services\PositionHandler;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+/**
+ * Class SortableAdminController
+ *
+ * @package Pix\SortableBehaviorBundle
+ */
 class SortableAdminController extends CRUDController
 {
     /**
      * Move element
      *
      * @param string $position
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function moveAction($position)
     {
@@ -34,18 +42,15 @@ class SortableAdminController extends CRUDController
             return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
         }
 
-        $object = $this->admin->getSubject();
+        /** @var PositionHandler $positionHandler */
+        $positionHandler = $this->get('pix_sortable_behavior.position');
+        $object          = $this->admin->getSubject();
 
-        /** @var PositionHandler $positionService */
-        $positionService = $this->get('pix_sortable_behavior.position');
+        $lastPositionNumber = $positionHandler->getLastPosition($object);
+        $newPositionNumber  = $positionHandler->getPosition($object, $position, $lastPositionNumber);
 
-        $entity = \Doctrine\Common\Util\ClassUtils::getClass($object);
-
-        $lastPosition = $positionService->getLastPosition($entity);
-
-        $position = $positionService->getPosition($object, $position, $lastPosition);
-
-        $setter = sprintf('set%s', ucfirst($positionService->getPositionFieldByEntity($entity)));
+        $entityClass = ClassUtils::getClass($object);
+        $setter = sprintf('set%s', ucfirst($positionHandler->getPositionFieldByEntity($entityClass)));
 
         if (!method_exists($object, $setter)) {
             throw new \LogicException(
@@ -57,7 +62,7 @@ class SortableAdminController extends CRUDController
             );
         }
 
-        $object->{$setter}($position);
+        $object->{$setter}($newPositionNumber);
         $this->admin->update($object);
 
         if ($this->isXmlHttpRequest()) {
@@ -77,5 +82,4 @@ class SortableAdminController extends CRUDController
             array('filter' => $this->admin->getFilterParameters())
         ));
     }
-
 }

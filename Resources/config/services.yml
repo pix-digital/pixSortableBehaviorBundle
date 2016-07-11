@@ -6,6 +6,7 @@ services:
             entityManager: "@doctrine.orm.entity_manager"
         calls:
             - [ 'setPositionField', ["%pix.sortable.behavior.position.field%"]]
+            - [ 'setSortableGroups', ["%pix.sortable.behavior.sortable_groups%"]]
 
     pix_sortable_behavior.position.mongodb:
         class: Pix\SortableBehaviorBundle\Services\PositionODMHandler

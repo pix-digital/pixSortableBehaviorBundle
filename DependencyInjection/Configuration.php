@@ -56,6 +56,18 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end()
+
+            ->arrayNode('sortable_groups')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->arrayNode('entities')
+                        ->useAttributeAsKey('name')
+                        ->prototype('variable')
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+
         ;
 
         return $treeBuilder;
