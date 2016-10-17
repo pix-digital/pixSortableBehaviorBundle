@@ -2,7 +2,7 @@
     {% set pix_position = sortableObjectPosition(object) %}
 
     {% if pix_position < admin.last_position %}
-        <a class="btn btn-sm btn-default fa-arrow-down" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="{{ 'move_to_bottom'|trans }}"></a>
+        <a class="btn btn-sm btn-default fa fa-arrow-down" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="{{ 'move_to_bottom'|trans }}"></a>
     {% endif %}
 
     {% if pix_position < admin.last_position %}
