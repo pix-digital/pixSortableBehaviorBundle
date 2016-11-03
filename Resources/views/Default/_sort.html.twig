@@ -2,18 +2,26 @@
     {% set pix_position = sortableObjectPosition(object) %}
 
     {% if (admin.last_position is defined and pix_position < admin.last_position) or ((admin.lastPosition is defined and pix_position < admin.lastPosition)) %}
-        <a class="btn btn-sm btn-default fa fa-arrow-down" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="{{ 'move_to_bottom'|trans }}"></a>
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="{{ 'move_to_bottom'|trans }}">
+            <i class="fa fa-arrow-down"></i>
+        </a>
     {% endif %}
 
     {% if (admin.last_position is defined and pix_position < admin.last_position) or ((admin.lastPosition is defined and pix_position < admin.lastPosition)) %}
-        <a class="btn btn-sm btn-default fa fa-long-arrow-down" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="{{ 'move_down'|trans }}"></a>
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="{{ 'move_down'|trans }}">
+            <i class="fa fa-long-arrow-down"></i>
+        </a>
     {% endif %}
 
     {% if pix_position > 0 %}
-        <a class="btn btn-sm btn-default fa fa-long-arrow-up" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="{{ 'move_up'|trans }}"></a>
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="{{ 'move_up'|trans }}">
+            <i class="fa fa-long-arrow-up"></i>
+        </a>
     {% endif %}
 
     {% if pix_position > 0 %}
-        <a class="btn btn-sm btn-default fa fa-arrow-up" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="{{ 'move_to_top'|trans }}"></a>
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="{{ 'move_to_top'|trans }}">
+            <i class="fa fa-arrow-up"></i>
+        </a>
     {% endif %}
 {% endif %}
