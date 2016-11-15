@@ -60,11 +60,13 @@ class PositionORMHandler extends PositionHandler
                 foreach ($groups as $groupName) {
                     $getter = 'get' . $groupName;
 
-                    $qb
-                        ->andWhere(sprintf('t.%s = :group_%s', $groupName, $i))
-                        ->setParameter(sprintf('group_%s', $i), $entity->$getter())
-                    ;
-                    $i++;
+                    if ($entity->$getter()) {
+                        $qb
+                            ->andWhere(sprintf('t.%s = :group_%s', $groupName, $i))
+                            ->setParameter(sprintf('group_%s', $i), $entity->$getter())
+                        ;
+                        $i++;
+                    }
                 }
             }
 
@@ -85,7 +87,10 @@ class PositionORMHandler extends PositionHandler
 
         foreach ($groups as $groupName) {
             $getter = 'get' . $groupName;
-            $cacheKey .= '_' . $entity->$getter()->getId();
+
+            if ($entity->$getter()) {
+                $cacheKey .= '_' . $entity->$getter()->getId();
+            }
         }
 
         return $cacheKey;
