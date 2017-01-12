@@ -10,6 +10,7 @@
 
 namespace Pix\SortableBehaviorBundle\Services;
 
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
 class PositionODMHandler extends PositionHandler
@@ -26,9 +27,11 @@ class PositionODMHandler extends PositionHandler
 
     public function getLastPosition($entity)
     {
-        $positionFields = $this->getPositionFieldByEntity($entity);
+        $entityClass = ClassUtils::getClass($entity);
+
+        $positionFields = $this->getPositionFieldByEntity($entityClass);
         $result = $this->dm
-            ->createQueryBuilder($entity)
+            ->createQueryBuilder($entityClass)
             ->hydrate(false)
             ->select($positionFields)
             ->sort($positionFields, 'desc')

@@ -10,18 +10,44 @@
 
 namespace Pix\SortableBehaviorBundle\Services;
 
+use Doctrine\Common\Util\ClassUtils;
+
 abstract class PositionHandler
 {
+    /**
+     * From config
+     *
+     * @var array
+     */
     protected $positionField;
 
+    /**
+     * From config
+     *
+     * @var array
+     */
+    private $sortableGroups;
+
+    /**
+     * @param object $entity
+     * @return int
+     */
     abstract public function getLastPosition($entity);
 
     /**
-     * @param mixed $positionField
+     * @param array $positionField
      */
-    public function setPositionField($positionField)
+    public function setPositionField(array $positionField)
     {
         $this->positionField = $positionField;
+    }
+
+    /**
+     * @param array $sortableGroups
+     */
+    public function setSortableGroups(array $sortableGroups)
+    {
+        $this->sortableGroups = $sortableGroups;
     }
 
     /**
@@ -32,28 +58,49 @@ abstract class PositionHandler
     public function getPositionFieldByEntity($entity)
     {
         if (is_object($entity)) {
-            $entity = \Doctrine\Common\Util\ClassUtils::getClass($entity);
+            $entity = ClassUtils::getClass($entity);
         }
+
         if (isset($this->positionField['entities'][$entity])) {
             return $this->positionField['entities'][$entity];
+
         } else {
             return $this->positionField['default'];
         }
     }
 
     /**
-     * @param $object
-     * @param $position
-     * @param $lastPosition
+     * @param $entity
+     *
+     * @return array
+     */
+    public function getSortableGroupsFieldByEntity($entity)
+    {
+        if (is_object($entity)) {
+            $entity = ClassUtils::getClass($entity);
+        }
+
+        $groups = [];
+        if (isset($this->sortableGroups['entities'][$entity])) {
+            $groups = $this->sortableGroups['entities'][$entity];
+        }
+
+        return $groups;
+    }
+
+    /**
+     * @param object $object
+     * @param string $movePosition
+     * @param int    $lastPosition
      *
      * @return int
      */
-    public function getPosition($object, $position, $lastPosition)
+    public function getPosition($object, $movePosition, $lastPosition)
     {
         $getter = sprintf('get%s', ucfirst($this->getPositionFieldByEntity($object)));
         $newPosition = 0;
 
-        switch ($position) {
+        switch ($movePosition) {
             case 'up' :
                 if ($object->{$getter}() > 0) {
                     $newPosition = $object->{$getter}() - 1;

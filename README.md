@@ -22,4 +22,8 @@ pix_sortable_behavior:
         entities:
             AppBundle/Entity/Foobar: order
             AppBundle/Entity/Baz: rang
+    sortable_groups:
+        entities:
+            AppBundle/Entity/Baz: [ group ]
+            
 ```
