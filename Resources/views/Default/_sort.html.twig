@@ -1,28 +1,28 @@
 {% if admin.isGranted('EDIT', object) and admin.hasRoute('edit') %}
     {% set current_position = currentObjectPosition(object) %}
     {% set last_position    = lastPosition(object) %}
-    
+
     {% if current_position < last_position %}
         <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="{{ 'move_to_bottom'|trans }}">
-            {{- 'icon_move_to_bottom'|trans -}}
+            <i class="fa fa-arrow-down"></i>
         </a>
     {% endif %}
 
     {% if current_position < last_position %}
         <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="{{ 'move_down'|trans }}">
-            {{- 'icon_move_down'|trans -}}
+            <i class="fa fa-long-arrow-down"></i>
         </a>
     {% endif %}
 
     {% if current_position > 0 %}
         <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="{{ 'move_up'|trans }}">
-            {{- 'icon_move_up'|trans -}}
+            <i class="fa fa-long-arrow-up"></i>
         </a>
     {% endif %}
 
     {% if current_position > 0 %}
         <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="{{ 'move_to_top'|trans }}">
-            {{- 'icon_move_to_top'|trans -}}
+            <i class="fa fa-arrow-up"></i>
         </a>
     {% endif %}
 {% endif %}
