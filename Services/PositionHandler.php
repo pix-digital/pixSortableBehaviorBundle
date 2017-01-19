@@ -89,6 +89,18 @@ abstract class PositionHandler
     }
 
     /**
+     * @param $entity
+     *
+     * @return int
+     */
+    public function getCurrentPosition($entity)
+    {
+        $getter = sprintf('get%s', ucfirst($this->getPositionFieldByEntity($entity)));
+
+        return $entity->{$getter}();
+    }
+
+    /**
      * @param object $object
      * @param string $movePosition
      * @param int    $lastPosition
@@ -97,30 +109,30 @@ abstract class PositionHandler
      */
     public function getPosition($object, $movePosition, $lastPosition)
     {
-        $getter = sprintf('get%s', ucfirst($this->getPositionFieldByEntity($object)));
+        $currentPosition = $this->getCurrentPosition($object);
         $newPosition = 0;
 
         switch ($movePosition) {
             case 'up' :
-                if ($object->{$getter}() > 0) {
-                    $newPosition = $object->{$getter}() - 1;
+                if ($currentPosition > 0) {
+                    $newPosition = $currentPosition - 1;
                 }
                 break;
 
             case 'down':
-                if ($object->{$getter}() < $lastPosition) {
-                    $newPosition = $object->{$getter}() + 1;
+                if ($currentPosition < $lastPosition) {
+                    $newPosition = $currentPosition + 1;
                 }
                 break;
 
             case 'top':
-                if ($object->{$getter}() > 0) {
+                if ($currentPosition > 0) {
                     $newPosition = 0;
                 }
                 break;
 
             case 'bottom':
-                if ($object->{$getter}() < $lastPosition) {
+                if ($currentPosition < $lastPosition) {
                     $newPosition = $lastPosition;
                 }
                 break;
