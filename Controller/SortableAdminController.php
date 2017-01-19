@@ -39,7 +39,10 @@ class SortableAdminController extends CRUDController
                 $translator->trans('flash_error_no_rights_update_position')
             );
 
-            return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
+            return new RedirectResponse($this->admin->generateUrl(
+                'list',
+                array('filter' => $this->admin->getFilterParameters())
+            ));
         }
 
         /** @var PositionHandler $positionHandler */
