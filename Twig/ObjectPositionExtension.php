@@ -50,14 +50,14 @@ class ObjectPositionExtension extends \Twig_Extension
     /**
      * @return int
      */
-    private function currentPosition($entity) {
+    public function currentPosition($entity) {
         return $this->positionHandler->getCurrentPosition($entity);
     }
 
     /**
      * @return int
      */
-    private function lastPosition($entity) {
+    public function lastPosition($entity) {
         return $this->positionHandler->getLastPosition($entity);
     }
 }
