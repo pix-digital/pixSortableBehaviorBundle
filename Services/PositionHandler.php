@@ -113,7 +113,7 @@ abstract class PositionHandler
         $newPosition = 0;
 
         switch ($movePosition) {
-            case 'up' :
+            case 'up':
                 if ($currentPosition > 0) {
                     $newPosition = $currentPosition - 1;
                 }
