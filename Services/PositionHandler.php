@@ -136,6 +136,12 @@ abstract class PositionHandler
                     $newPosition = $lastPosition;
                 }
                 break;
+
+            default:
+                if (is_numeric($movePosition)) {
+                    $newPosition = $movePosition;
+                }
+
         }
 
         return $newPosition;
