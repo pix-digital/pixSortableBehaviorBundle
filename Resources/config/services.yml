@@ -3,7 +3,7 @@ services:
         class: Pix\SortableBehaviorBundle\Services\PositionORMHandler
         public: false
         arguments:
-            entityManager: "@doctrine.orm.entity_manager"
+            - "@doctrine.orm.entity_manager"
         calls:
             - [ 'setPositionField', ["%pix.sortable.behavior.position.field%"]]
             - [ 'setSortableGroups', ["%pix.sortable.behavior.sortable_groups%"]]
@@ -12,7 +12,7 @@ services:
         class: Pix\SortableBehaviorBundle\Services\PositionODMHandler
         public: false
         arguments:
-            documentManager: "@doctrine_mongodb.odm.document_manager"
+            - "@doctrine_mongodb.odm.document_manager"
         calls:
             - [ 'setPositionField', ["%pix.sortable.behavior.position.field%"]]
 
