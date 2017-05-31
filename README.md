@@ -27,3 +27,25 @@ pix_sortable_behavior:
             AppBundle/Entity/Baz: [ group ]
             
 ```
+
+#### Disable top and bottom buttons
+```php
+<?php
+
+    // ClientAdmin.php
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->addIdentifier('name')
+            ->add('enabled')
+            ->add('_action', null, array(
+                'actions' => array(
+                    'move' => array(
+                        'template' => 'AppBundle:Admin:_sort.html.twig',
+                        'enable_top_bottom_buttons' => true,
+                    ),
+                ),
+            ))
+        ;
+    }
+```    

@@ -1,8 +1,9 @@
 {% if admin.isGranted('EDIT', object) and admin.hasRoute('edit') %}
     {% set current_position = currentObjectPosition(object) %}
     {% set last_position    = lastPosition(object) %}
+    {% set enable_top_bottom_buttons = field_description.options.actions.move.enable_top_bottom_buttons ?? true %}
 
-    {% if current_position < last_position %}
+    {% if enable_top_bottom_buttons and current_position < last_position %}
         <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="{{ 'move_to_bottom'|trans }}">
             <i class="fa fa-angle-double-down"></i>
         </a>
@@ -20,7 +21,7 @@
         </a>
     {% endif %}
 
-    {% if current_position > 0 %}
+    {% if enable_top_bottom_buttons and current_position > 0 %}
         <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="{{ 'move_to_top'|trans }}">
             <i class="fa fa-angle-double-up"></i>
         </a>
