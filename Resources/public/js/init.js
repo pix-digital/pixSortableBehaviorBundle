@@ -1,7 +1,23 @@
-jQuery( function() {
-    var element = $('.sonata-ba-list tbody');
+$(function() {
+    $('.sonata-ba-list tbody').draggableTable();
+});
 
-    element.sortable({
+$.fn.draggableTable = function (settings) {
+    $(this).each(function (index, item) {
+        item = $(item);
+        var instance = item.data('DraggableTable');
+        if (!instance) {
+            item.data('DraggableTable', new DraggableTable(this, settings));
+        }
+    });
+};
+
+var DraggableTable = function () {
+    this.init.apply(this, arguments);
+};
+
+DraggableTable.prototype.init = function (node, settings) {
+    $(node).sortable({
         'handle': '.js-sortable-move',
         'axis': 'y',
         'cancel': 'input,textarea,select,option,button:not(.js-sortable-move)',
@@ -26,15 +42,13 @@ jQuery( function() {
                 'url': moved.data('url').replace('NEW_POSITION', newPosition),
                 'dataType': 'json',
                 'success': function(data) {
-                    console.log('success');
+                    $(document).trigger("pixSortableBehaviorBundle.success", [data]);
                 },
-                'error': function(data {
-                    console.log('error');
+                'error': function(data) {
+                    $(document).trigger("pixSortableBehaviorBundle.error",[data]);
                 }
             });
 
         }
     }).disableSelection();
-});
-
-
+};
