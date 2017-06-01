@@ -45,6 +45,11 @@ class Configuration implements ConfigurationInterface
                 ->cannotBeEmpty()
                 ->defaultValue('orm')
             ->end()
+
+            ->scalarNode('position_handler')
+                ->defaultNull()
+            ->end()
+
             ->arrayNode('position_field')
                 ->addDefaultsIfNotSet()
                 ->children()

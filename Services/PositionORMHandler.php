@@ -85,11 +85,12 @@ class PositionORMHandler extends PositionHandler
     {
         $cacheKey = ClassUtils::getClass($entity);
 
-        foreach ($groups as $groupName) {
-            $getter = 'get' . $groupName;
+        foreach ($groups as $group) {
+            $getter = 'get' . ucfirst($group);
 
             if ($entity->$getter()) {
-                $cacheKey .= '_' . $entity->$getter()->getId();
+                $data = $entity->$getter();
+                $cacheKey .= '_' . is_object($data) ? $data->getId() : $data;
             }
         }
 
