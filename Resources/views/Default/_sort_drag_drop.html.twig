@@ -3,21 +3,14 @@
     {% set last_position    = lastPosition(object) %}
     {% set enable_top_bottom_buttons = field_description.options.actions.move.enable_top_bottom_buttons ?? true %}
 
+    
+    <span class="btn btn-sm btn-default js-sortable-move" data-url="{{ admin.generateObjectUrl('move', object, {'position': 'NEW_POSITION'}) }}">
+        <i class="fa fa-arrows"></i>
+    </span>
+    
     {% if enable_top_bottom_buttons and current_position < last_position %}
         <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="{{ 'move_to_bottom'|trans }}">
             <i class="fa fa-angle-double-down"></i>
-        </a>
-    {% endif %}
-
-    {% if current_position < last_position %}
-        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="{{ 'move_down'|trans }}">
-            <i class="fa fa-angle-down"></i>
-        </a>
-    {% endif %}
-
-    {% if current_position > 0 %}
-        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="{{ 'move_up'|trans }}">
-            <i class="fa fa-angle-up"></i>
         </a>
     {% endif %}
 
@@ -26,4 +19,5 @@
             <i class="fa fa-angle-double-up"></i>
         </a>
     {% endif %}
+
 {% endif %}

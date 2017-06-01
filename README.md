@@ -27,3 +27,62 @@ pix_sortable_behavior:
             AppBundle/Entity/Baz: [ group ]
             
 ```
+
+#### Use a draggable list instead of up/down buttons
+In order to use a draggable list instead of up/down buttons, change the template in the ```move``` action to ```AppBundle:Admin:_sort_drag_drop.html.twig```.
+
+```php
+<?php
+
+    // ClientAdmin.php
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->addIdentifier('name')
+            ->add('enabled')
+            ->add('_action', null, array(
+                'actions' => array(
+                    'move' => array(
+                        'template' => 'AppBundle:Admin:_sort_drag_drop.html.twig',
+                        'enable_top_bottom_buttons' => true, //optional
+                    ),
+                ),
+            ))
+        ;
+    }
+```    
+Also include the JavaScript needed for this to work, in your ```theme.yml``` file, add these two lines:
+```yml
+    //...
+    javascripts:
+        - bundles/pixsortablebehavior/js/jquery-ui.min.js // if you haven't got jQuery UI yet.
+        - bundles/pixsortablebehavior/js/init.js
+```
+
+Adding the JavaScript and the template, will give you the possibility to drag items in a tablelist.
+In case you need it, this plugin fires to jQuery events when dragging is done on the ```$(document)``` element, so if you want to add custom notification, that is possible.
+```
+pixSortableBehaviorBundle.success
+pixSortableBehaviorBundle.error
+```
+#### Disable top and bottom buttons
+```php
+<?php
+
+    // ClientAdmin.php
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->addIdentifier('name')
+            ->add('enabled')
+            ->add('_action', null, array(
+                'actions' => array(
+                    'move' => array(
+                        'template' => 'AppBundle:Admin:_sort.html.twig',
+                        'enable_top_bottom_buttons' => true,
+                    ),
+                ),
+            ))
+        ;
+    }
+```    
