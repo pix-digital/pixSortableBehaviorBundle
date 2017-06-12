@@ -24,12 +24,12 @@ pix_sortable_behavior:
             AppBundle/Entity/Baz: rang
     sortable_groups:
         entities:
-            AppBundle/Entity/Baz: [ group ]
+            AppBundle/Entity/Baz: [ group ] #
             
 ```
 
 #### Use a draggable list instead of up/down buttons
-In order to use a draggable list instead of up/down buttons, change the template in the ```move``` action to ```AppBundle:Admin:_sort_drag_drop.html.twig```.
+In order to use a draggable list instead of up/down buttons, change the template in the ```move``` action to ```PixSortableBehaviorBundle:Default:_sort_drag_drop.html.twig```.
 
 ```php
 <?php
@@ -43,8 +43,9 @@ In order to use a draggable list instead of up/down buttons, change the template
             ->add('_action', null, array(
                 'actions' => array(
                     'move' => array(
-                        'template' => 'AppBundle:Admin:_sort_drag_drop.html.twig',
+                        'template' => 'PixSortableBehaviorBundle:Default:_sort_drag_drop.html.twig',
                         'enable_top_bottom_buttons' => true, //optional
+                        'groups' => array('group') //only if you've defined a sortable group for your entity in the config
                     ),
                 ),
             ))
@@ -78,8 +79,9 @@ pixSortableBehaviorBundle.error
             ->add('_action', null, array(
                 'actions' => array(
                     'move' => array(
-                        'template' => 'AppBundle:Admin:_sort.html.twig',
-                        'enable_top_bottom_buttons' => true,
+                        'template' => 'PixSortableBehaviorBundle:Default:_sort.html.twig',
+                        'enable_top_bottom_buttons' => false, //Disabled buttons
+                        'groups' => array('group') //only if you've defined a sortable group for your entity in the config
                     ),
                 ),
             ))
