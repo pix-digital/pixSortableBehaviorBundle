@@ -24,7 +24,7 @@ pix_sortable_behavior:
             AppBundle/Entity/Baz: rang
     sortable_groups:
         entities:
-            AppBundle/Entity/Baz: [ group ] #
+            AppBundle/Entity/Baz: [ group ] #Sortable groups goes here or in your doctrine mapping if you use Gedmo
             
 ```
 
