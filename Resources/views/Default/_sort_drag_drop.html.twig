@@ -2,7 +2,9 @@
     {% set current_position = currentObjectPosition(object) %}
     {% set last_position    = lastPosition(object) %}
     {% set enable_top_bottom_buttons = field_description.options.actions.move.enable_top_bottom_buttons ?? true %}
-    {% set groups = field_description.options.actions.move.groups %}
+    {% if field_description.options.actions.move.groups is defined %}
+        {% set groups = field_description.options.actions.move.groups %}
+    {% endif %}
 
     <span class="btn btn-sm btn-default js-sortable-move"
       data-url="{{ admin.generateObjectUrl('move', object, {'position': 'NEW_POSITION'}) }}"
