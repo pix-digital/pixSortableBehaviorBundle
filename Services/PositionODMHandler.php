@@ -31,7 +31,7 @@ class PositionODMHandler extends PositionHandler
         $parentEntityClass = true;
         while ($parentEntityClass)
         {
-            $parentEntityClass = ClassUtils::getParentClass($entity);
+            $parentEntityClass = ClassUtils::getParentClass($entityClass);
             if ($parentEntityClass)
                 $entityClass = $parentEntityClass;
         }
