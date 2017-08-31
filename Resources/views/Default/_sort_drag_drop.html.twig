@@ -2,9 +2,13 @@
     {% set current_position = currentObjectPosition(object) %}
     {% set last_position    = lastPosition(object) %}
     {% set enable_top_bottom_buttons = field_description.options.actions.move.enable_top_bottom_buttons ?? true %}
+    {% if field_description.options.actions.move.groups is defined %}
+        {% set groups = field_description.options.actions.move.groups %}
+    {% endif %}
 
-    
-    <span class="btn btn-sm btn-default js-sortable-move" data-url="{{ admin.generateObjectUrl('move', object, {'position': 'NEW_POSITION'}) }}">
+    <span class="btn btn-sm btn-default js-sortable-move"
+      data-url="{{ admin.generateObjectUrl('move', object, {'position': 'NEW_POSITION'}) }}"
+      {% if groups is defined and groups is iterable %}data-group="{% for group in groups %}{{ group~attribute(object, group).id }}{% endfor %}"{% endif %}>
         <i class="fa fa-arrows"></i>
     </span>
     

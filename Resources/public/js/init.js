@@ -37,6 +37,15 @@ DraggableTable.prototype.init = function (node, settings) {
             var moved = $(ui.item).find('.js-sortable-move');
             var newPosition = ui.item.index();
 
+            groups = moved.data('group');
+            if (groups) {
+                var list = $(ui.item).parent().children()
+                group = list.filter(function() {
+                    return $(this).find('.js-sortable-move').data("group") == groups;
+                });
+                newPosition = group.index(ui.item);
+            }
+
             $.ajax({
                 'type': 'GET',
                 'url': moved.data('url').replace('NEW_POSITION', newPosition),
@@ -45,7 +54,7 @@ DraggableTable.prototype.init = function (node, settings) {
                     $(document).trigger("pixSortableBehaviorBundle.success", [data]);
                 },
                 'error': function(data) {
-                    $(document).trigger("pixSortableBehaviorBundle.error",[data]);
+                    $(document).trigger("pixSortableBehaviorBundle.error", [data]);
                 }
             });
 

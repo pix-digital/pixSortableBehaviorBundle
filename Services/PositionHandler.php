@@ -114,27 +114,19 @@ abstract class PositionHandler
 
         switch ($movePosition) {
             case 'up' :
-                if ($currentPosition > 0) {
                     $newPosition = $currentPosition - 1;
-                }
                 break;
 
             case 'down':
-                if ($currentPosition < $lastPosition) {
                     $newPosition = $currentPosition + 1;
-                }
                 break;
 
             case 'top':
-                if ($currentPosition > 0) {
                     $newPosition = 0;
-                }
                 break;
 
             case 'bottom':
-                if ($currentPosition < $lastPosition) {
                     $newPosition = $lastPosition;
-                }
                 break;
 
             default:
@@ -143,6 +135,8 @@ abstract class PositionHandler
                 }
 
         }
+        //Asserts the position is in the range
+        $newPosition = max(0, min($newPosition, $lastPosition));
 
         return $newPosition;
     }
