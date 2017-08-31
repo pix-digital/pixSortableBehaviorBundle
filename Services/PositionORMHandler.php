@@ -46,6 +46,14 @@ class PositionORMHandler extends PositionHandler
     public function getLastPosition($entity)
     {
         $entityClass = ClassUtils::getClass($entity);
+        $parentEntityClass = true;
+        while ($parentEntityClass)
+        {
+            $parentEntityClass = ClassUtils::getParentClass($entityClass);
+            if ($parentEntityClass)
+                $entityClass = $parentEntityClass;
+        }
+        
         $groups      = $this->getSortableGroupsFieldByEntity($entityClass);
 
         $cacheKey = $this->getCacheKeyForLastPosition($entity, $groups);

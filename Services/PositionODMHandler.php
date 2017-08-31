@@ -28,6 +28,13 @@ class PositionODMHandler extends PositionHandler
     public function getLastPosition($entity)
     {
         $entityClass = ClassUtils::getClass($entity);
+        $parentEntityClass = true;
+        while ($parentEntityClass)
+        {
+            $parentEntityClass = ClassUtils::getParentClass($entityClass);
+            if ($parentEntityClass)
+                $entityClass = $parentEntityClass;
+        }
 
         $positionFields = $this->getPositionFieldByEntity($entityClass);
         $result = $this->dm
