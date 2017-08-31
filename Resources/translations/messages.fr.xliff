@@ -8,23 +8,23 @@
             </trans-unit>
             <trans-unit id="2">
                 <source>flash_error_no_rights_update_position</source>
-                <target>flash_error_no_rights_update_position</target>
+                <target>Vous n'avez pas les droits nécessaire pour modifier la position</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>move_to_bottom</source>
-                <target>move_to_bottom</target>
+                <target>Déplacer tout en bas</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>move_down</source>
-                <target>move_down</target>
+                <target>Déplacer vers le bas</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>move_up</source>
-                <target>move_up</target>
+                <target>Déplacer vers le haut</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>move_to_top</source>
-                <target>move_to_top</target>
+                <target>Déplacer tout en haut</target>
             </trans-unit>
         </body>
     </file>
