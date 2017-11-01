@@ -60,7 +60,7 @@ Also include the JavaScript needed for this to work, in your ```theme.yml``` fil
 ```
 
 Adding the JavaScript and the template, will give you the possibility to drag items in a tablelist.
-In case you need it, this plugin fires to jQuery events when dragging is done on the ```$(document)``` element, so if you want to add custom notification, that is possible.
+In case you need it, this plugin fires to jQuery events when dragging is done on the ```$(document)``` element, so if you want to add custom notification, that is possible. Also, when dragging the ```<body>``` gets an ```is-dragging``` class. This class is removed when you stop dragging. This could by quite handy if you have some custom js/css.
 ```
 pixSortableBehaviorBundle.success
 pixSortableBehaviorBundle.error

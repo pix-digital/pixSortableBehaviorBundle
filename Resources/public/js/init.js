@@ -27,6 +27,14 @@ DraggableTable.prototype.init = function (node, settings) {
 
     element.sortable({
         'handle': '.js-sortable-move',
+        'start': function() {
+            $('body').addClass('is-dragging');
+        },
+        'stop': function() {
+            setTimeout(function() {
+                $('body').removeClass('is-dragging')
+            }, 100);
+        },
         'axis': 'y',
         'cancel': 'input,textarea,select,option,button:not(.js-sortable-move)',
         'tolerance': 'pointer',
