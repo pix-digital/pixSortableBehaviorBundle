@@ -3,8 +3,7 @@
     {% set last_position    = lastPosition(object) %}
     {% set enable_top_bottom_buttons = field_description.options.actions.move.enable_top_bottom_buttons ?? true %}
 
-    
-    <span class="btn btn-sm btn-default js-sortable-move" data-url="{{ admin.generateObjectUrl('move', object, {'position': 'NEW_POSITION'}) }}">
+    <span class="btn btn-sm btn-default js-sortable-move" data-current-position="{{ current_position }}" data-url="{{ admin.generateObjectUrl('move', object, {'position': 'NEW_POSITION'}) }}">
         <i class="fa fa-arrows"></i>
     </span>
     
