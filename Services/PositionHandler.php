@@ -139,7 +139,7 @@ abstract class PositionHandler
 
             default:
                 if (is_numeric($movePosition)) {
-                    $newPosition = $movePosition;
+                    $newPosition = (int) $movePosition;
                 }
 
         }
