@@ -17,7 +17,15 @@ var DraggableTable = function () {
 };
 
 DraggableTable.prototype.init = function (node, settings) {
-    $(node).sortable({
+    var element = $(node);
+    var movers = $('.js-sortable-move');
+    if (movers.length <= 1) return;
+
+    var first = parseInt(movers.first().attr('data-current-position'));
+    var last = parseInt(movers.last().attr('data-current-position'));
+    var direction = first <= last ? 1 : -1;
+
+    element.sortable({
         'handle': '.js-sortable-move',
         'axis': 'y',
         'cancel': 'input,textarea,select,option,button:not(.js-sortable-move)',
@@ -34,8 +42,12 @@ DraggableTable.prototype.init = function (node, settings) {
             return ui;
         },
         'update': function(event, ui) {
+            $('.js-sortable-move').each(function(index, item) {
+                $(item).attr('data-current-position', first + (index * direction));
+            });
+
             var moved = $(ui.item).find('.js-sortable-move');
-            var newPosition = ui.item.index();
+            var newPosition = moved.attr('data-current-position');
 
             $.ajax({
                 'type': 'GET',
@@ -48,7 +60,6 @@ DraggableTable.prototype.init = function (node, settings) {
                     $(document).trigger("pixSortableBehaviorBundle.error",[data]);
                 }
             });
-
         }
     }).disableSelection();
 };
