@@ -11,6 +11,8 @@
 namespace Pix\SortableBehaviorBundle\Services;
 
 use Doctrine\Common\Util\ClassUtils;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 abstract class PositionHandler
 {
@@ -27,6 +29,23 @@ abstract class PositionHandler
      * @var array
      */
     private $sortableGroups;
+
+    /**
+     * @var PropertyAccessor
+     */
+    private $accessor;
+
+    /**
+     * @return PropertyAccessor
+     */
+    private function getAccessor()
+    {
+        if (!$this->accessor) {
+            $this->accessor = PropertyAccess::createPropertyAccessor();
+        }
+
+        return $this->accessor;
+    }
 
     /**
      * @param object $entity
@@ -95,9 +114,7 @@ abstract class PositionHandler
      */
     public function getCurrentPosition($entity)
     {
-        $getter = sprintf('get%s', ucfirst($this->getPositionFieldByEntity($entity)));
-
-        return $entity->{$getter}();
+        return $this->getAccessor()->getValue($entity, $this->getPositionFieldByEntity($entity));
     }
 
     /**
