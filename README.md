@@ -7,7 +7,7 @@ Offers a sortable feature for your Symfony2 admin listing
 
 The SonataAdminBundle provides a cookbook article here :
 
-https://github.com/sonata-project/SonataAdminBundle/blob/master/Resources/doc/cookbook/recipe_sortable_listing.rst
+https://github.com/sonata-project/SonataAdminBundle/blob/3.x/docs/cookbook/recipe_sortable_listing.rst
 
 ### Configuration
 
