@@ -14,6 +14,7 @@ use Doctrine\Common\Util\ClassUtils;
 use Pix\SortableBehaviorBundle\Services\PositionHandler;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Class SortableAdminController
@@ -52,20 +53,9 @@ class SortableAdminController extends CRUDController
         $lastPositionNumber = $positionHandler->getLastPosition($object);
         $newPositionNumber  = $positionHandler->getPosition($object, $position, $lastPositionNumber);
 
-        $entityClass = ClassUtils::getClass($object);
-        $setter = sprintf('set%s', ucfirst($positionHandler->getPositionFieldByEntity($entityClass)));
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $accessor->setValue($object, $positionHandler->getPositionFieldByEntity($object), $newPositionNumber);
 
-        if (!method_exists($object, $setter)) {
-            throw new \LogicException(
-                sprintf(
-                    '%s does not implement ->%s() to set the desired position.',
-                    $object,
-                    $setter
-                )
-            );
-        }
-
-        $object->{$setter}($newPositionNumber);
         $this->admin->update($object);
 
         if ($this->isXmlHttpRequest()) {
