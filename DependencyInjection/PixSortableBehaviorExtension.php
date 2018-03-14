@@ -43,5 +43,6 @@ class PixSortableBehaviorExtension extends Extension
         );
 
         $container->setAlias('pix_sortable_behavior.position', new Alias($positionHandler));
+        $container->getAlias('pix_sortable_behavior.position')->setPublic(true);
     }
 }
