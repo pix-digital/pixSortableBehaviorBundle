@@ -50,8 +50,13 @@ class PositionORMHandler extends PositionHandler
         while ($parentEntityClass)
         {
             $parentEntityClass = ClassUtils::getParentClass($entityClass);
-            if ($parentEntityClass)
+            if ($parentEntityClass) {
+                $reflection = new \ReflectionClass($parentEntityClass);
+                if($reflection->isAbstract()) {
+                    break;
+                }
                 $entityClass = $parentEntityClass;
+            }
         }
         
         $groups      = $this->getSortableGroupsFieldByEntity($entityClass);

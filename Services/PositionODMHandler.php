@@ -32,8 +32,13 @@ class PositionODMHandler extends PositionHandler
         while ($parentEntityClass)
         {
             $parentEntityClass = ClassUtils::getParentClass($entityClass);
-            if ($parentEntityClass)
+            if ($parentEntityClass) {
+                $reflection = new \ReflectionClass($parentEntityClass);
+                if($reflection->isAbstract()) {
+                    break;
+                }
                 $entityClass = $parentEntityClass;
+            }
         }
 
         $positionFields = $this->getPositionFieldByEntity($entityClass);
