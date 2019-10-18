@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>flash_success_position_updated</source>
+                <target>Positie geupdate</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>flash_error_no_rights_update_position</source>
+                <target>U bent niet toegestaan om de positie te veranderen!</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>move_to_bottom</source>
+                <target>Verplaats naar onderkant</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>move_down</source>
+                <target>Verplaats omlaag</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>move_up</source>
+                <target>Verplaats omhoog</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>move_to_top</source>
+                <target>Verplaats naar bovenkant</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
