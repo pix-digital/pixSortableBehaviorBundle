@@ -52,7 +52,10 @@ class PositionORMHandler extends PositionHandler
             $parentEntityClass = ClassUtils::getParentClass($entityClass);
             if ($parentEntityClass) {
                 $reflection = new \ReflectionClass($parentEntityClass);
-                if($reflection->isAbstract()) {
+                if ($reflection->isAbstract()) {
+                    break;
+                }
+                if (!$this->em->getMetadataFactory()->isTransient($parentEntityClass)) {
                     break;
                 }
                 $entityClass = $parentEntityClass;
