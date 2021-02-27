@@ -14,11 +14,10 @@ use Doctrine\Common\Util\ClassUtils;
 use Pix\SortableBehaviorBundle\Services\PositionHandler;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Class SortableAdminController
- *
  * @package Pix\SortableBehaviorBundle
  */
 class SortableAdminController extends CRUDController
@@ -28,9 +27,12 @@ class SortableAdminController extends CRUDController
      *
      * @param string $position
      *
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
-    public function moveAction($position)
+    public function moveAction(
+        $position,
+        PositionHandler $positionHandler
+    ): Response
     {
         $translator = $this->get('translator');
 
@@ -46,8 +48,6 @@ class SortableAdminController extends CRUDController
             ));
         }
 
-        /** @var PositionHandler $positionHandler */
-        $positionHandler = $this->get('pix_sortable_behavior.position');
         $object          = $this->admin->getSubject();
 
         $lastPositionNumber = $positionHandler->getLastPosition($object);

@@ -12,9 +12,12 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0",
-        "symfony/framework-bundle": ">=2.1",
-        "symfony/form": ">=2.1"
+        "php": ">=7.2",
+        "symfony/dependency-injection": ">=5.0",
+        "symfony/form": ">=5.0",
+        "symfony/config": ">=5.0",
+        "symfony/http-kernel": ">=5.0",
+        "twig/twig": "^2.0 || ^3.0"
     },
     "require-dev": {
         "gedmo/doctrine-extensions": ">=2.2"
