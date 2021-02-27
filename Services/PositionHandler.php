@@ -49,9 +49,8 @@ abstract class PositionHandler
 
     /**
      * @param object $entity
-     * @return int
      */
-    abstract public function getLastPosition($entity);
+    abstract public function getLastPosition($entity): int;
 
     /**
      * @param array $positionField
@@ -109,22 +108,18 @@ abstract class PositionHandler
 
     /**
      * @param $entity
-     *
-     * @return int
      */
-    public function getCurrentPosition($entity)
+    public function getCurrentPosition($entity): int
     {
-        return $this->getAccessor()->getValue($entity, $this->getPositionFieldByEntity($entity));
+        return (int) $this->getAccessor()->getValue($entity, $this->getPositionFieldByEntity($entity));
     }
 
     /**
      * @param object $object
      * @param string $movePosition
      * @param int    $lastPosition
-     *
-     * @return int
      */
-    public function getPosition($object, $movePosition, $lastPosition)
+    public function getPosition($object, $movePosition, $lastPosition): int
     {
         $currentPosition = $this->getCurrentPosition($object);
         $newPosition = 0;

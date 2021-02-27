@@ -25,7 +25,7 @@ class PositionODMHandler extends PositionHandler
         $this->dm = $documentManager;
     }
 
-    public function getLastPosition($entity)
+    public function getLastPosition($entity): int
     {
         $entityClass = ClassUtils::getClass($entity);
         $parentEntityClass = true;
