@@ -3,13 +3,14 @@
 namespace Pix\SortableBehaviorBundle\Twig;
 
 use Pix\SortableBehaviorBundle\Services\PositionHandler;
+use Twig\Extension\AbstractExtension;
 
 /**
  * Description of ObjectPositionExtension
  *
  * @author Volker von Hoesslin <volker.von.hoesslin@empora.com>
  */
-class ObjectPositionExtension extends \Twig_Extension
+class ObjectPositionExtension extends AbstractExtension
 {
     const NAME = 'sortableObjectPosition';
 
