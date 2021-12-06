@@ -4,6 +4,7 @@ namespace Pix\SortableBehaviorBundle\Twig;
 
 use Pix\SortableBehaviorBundle\Services\PositionHandler;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Description of ObjectPositionExtension
@@ -43,8 +44,8 @@ class ObjectPositionExtension extends AbstractExtension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('currentObjectPosition', array($this, 'currentPosition')),
-            new \Twig_SimpleFunction('lastPosition', array($this, 'lastPosition'))
+            new TwigFunction('currentObjectPosition', array($this, 'currentPosition')),
+            new TwigFunction('lastPosition', array($this, 'lastPosition'))
         );
     }
 
