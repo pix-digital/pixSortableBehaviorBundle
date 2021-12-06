@@ -3,13 +3,15 @@
 namespace Pix\SortableBehaviorBundle\Twig;
 
 use Pix\SortableBehaviorBundle\Services\PositionHandler;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Description of ObjectPositionExtension
  *
  * @author Volker von Hoesslin <volker.von.hoesslin@empora.com>
  */
-class ObjectPositionExtension extends \Twig_Extension
+class ObjectPositionExtension extends AbstractExtension
 {
     const NAME = 'sortableObjectPosition';
 
@@ -42,8 +44,8 @@ class ObjectPositionExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('currentObjectPosition', array($this, 'currentPosition')),
-            new \Twig_SimpleFunction('lastPosition', array($this, 'lastPosition'))
+            new TwigFunction('currentObjectPosition', array($this, 'currentPosition')),
+            new TwigFunction('lastPosition', array($this, 'lastPosition'))
         );
     }
 
